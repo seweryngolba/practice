@@ -3,31 +3,54 @@
     <title>Pedro's Todo App</title>
   </head>
   <body>
-    <div>Pedro</div>
-    <button>Press me</button>
+    <input id="todo-title" type="text" />
+    <input type="date" id="date-picker" />
+    <button onclick="addTodo()" id="todo-button">Add Todo</button>
+
+    <div id="todo-list"></div>
 
     <script>
-      let todo1 = "Get groceries";
-      let todo2 = "Wash car";
-      let todo3 = "Make dinner";
+      const todos = [
+        {
+          title: "Get groceries",
+          dueDate: "2021-10-04",
+        },
+        {
+          title: "Wash car",
+          dueDate: "2021-10-04",
+        },
+        {
+          title: "Make dinner",
+          dueDate: "2021-10-04",
+        },
+      ];
 
-      let element = document.createElement("div");
-      element.innerText = todo3;
-      document.body.appendChild(element);
+      render();
 
-      element = document.createElement("div");
-      element.innerText = todo2;
-      document.body.appendChild(element);
+      function addTodo() {
+        const textbox = document.getElementById("todo-title");
+        const title = textbox.value;
 
-      element = document.createElement("div");
-      element.innerText = todo1;
-      document.body.appendChild(element);
+        const datePicker = document.getElementById("date-picker");
+        const dueDate = datePicker.value;
+        todos.push({
+          title: title,
+          dueDate: dueDate,
+        });
 
-      let btn = document.createElement("button");
-      btn.innerText = "Click Me";
-      document.body.appendChild(btn);
+        render();
+      }
 
-      document.title = "New Title";
+      function render() {
+        document.getElementById("todo-list").innerHTML = "";
+
+        todos.forEach(function (todo) {
+          const element = document.createElement("div");
+          element.innerText = todo.title + " " + todo.dueDate;
+          const todoList = document.getElementById("todo-list");
+          todoList.appendChild(element);
+        });
+      }
     </script>
   </body>
 </html>
